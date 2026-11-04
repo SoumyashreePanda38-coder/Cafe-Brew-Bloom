@@ -1,0 +1,588 @@
+<section class="gallery-page">
+
+  <!-- =========================================================
+       AMBIENT BACKGROUND
+       ========================================================= -->
+
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <div class="ambient ambient-three"></div>
+
+  <div class="grain"></div>
+
+
+  <!-- =========================================================
+       INTRO
+       ========================================================= -->
+
+  <section class="gallery-intro">
+
+    <div class="intro-content">
+
+      <div class="eyebrow">
+
+        <span class="eyebrow-line"></span>
+
+        THE BREW & BLOOM EXPERIENCE
+
+        <span class="eyebrow-line"></span>
+
+      </div>
+
+
+      <h1>
+
+        A little world
+        <span>worth exploring.</span>
+
+      </h1>
+
+
+      <p>
+
+        Spin through the corners,
+        colours and little moments
+        that make Brew & Bloom feel like home.
+
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================================
+       GALLERY
+       ========================================================= -->
+
+  <section
+    class="gallery-section"
+    *ngIf="!isLoading && galleryItems.length"
+  >
+
+    <div class="gallery-container">
+
+
+      <!-- =====================================================
+           SECTION HEADER
+           ===================================================== -->
+
+      <div class="gallery-header">
+
+        <div>
+
+          <span class="section-kicker">
+            INSIDE BREW & BLOOM
+          </span>
+
+          <h2>
+            Spin the
+            <em>experience.</em>
+          </h2>
+
+        </div>
+
+
+        <div class="gallery-count">
+
+          <span>
+            {{ (activeIndex + 1)
+              .toString()
+              .padStart(2, '0') }}
+          </span>
+
+          <small>/</small>
+
+          <span>
+            {{ galleryItems.length
+              .toString()
+              .padStart(2, '0') }}
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =====================================================
+           WHEEL AREA
+           ===================================================== -->
+
+      <div
+        class="wheel-stage"
+
+        [class.is-dragging]="isDragging"
+        [class.is-spinning]="isSpinning"
+
+        (mousedown)="startDrag($event)"
+
+        (touchstart)="onTouchStart($event)"
+        (touchmove)="onTouchMove($event)"
+        (touchend)="onTouchEnd()"
+      >
+
+
+        <!-- Ambient wheel glow -->
+
+        <div class="wheel-glow"></div>
+
+
+        <!-- Outer glass ring -->
+
+        <div class="wheel-ring wheel-ring-one"></div>
+
+        <div class="wheel-ring wheel-ring-two"></div>
+
+        <div class="wheel-ring wheel-ring-three"></div>
+
+
+        <!-- Decorative dots -->
+
+        <span class="orbit-dot orbit-dot-one"></span>
+
+        <span class="orbit-dot orbit-dot-two"></span>
+
+        <span class="orbit-dot orbit-dot-three"></span>
+
+        <span class="orbit-dot orbit-dot-four"></span>
+
+
+
+        <!-- =================================================
+             IMAGE WHEEL
+             ================================================= -->
+
+        <div class="image-wheel">
+
+          <div
+            class="wheel-image"
+
+            *ngFor="
+              let item of galleryItems;
+              let i = index;
+              trackBy: trackByGalleryId
+            "
+
+            [ngStyle]="getItemStyle(i)"
+
+            [class.active]="i === activeIndex"
+
+            (click)="
+              selectImage(i);
+              $event.stopPropagation()
+            "
+          >
+
+            <div class="wheel-image-inner">
+
+              <img
+                [appLazyImage]="item.image"
+
+                [alt]="
+                  item.altText ||
+                  item.title ||
+                  'Brew & Bloom café ambience'
+                "
+              />
+
+              <div class="wheel-image-shine"></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             CENTER GLASS CONTROL
+             ================================================= -->
+
+        <div
+          class="wheel-center"
+
+          (click)="
+            isSpinning
+              ? stopSpin()
+              : spinWheel();
+
+            $event.stopPropagation()
+          "
+        >
+
+          <div class="center-glass">
+
+            <div class="center-logo">
+
+              <span class="logo-small">
+                BREW
+              </span>
+
+              <span class="logo-main">
+                & BLOOM
+              </span>
+
+            </div>
+
+
+            <div class="center-divider"></div>
+
+
+            <span class="center-action">
+
+              {{ isSpinning
+                ? 'STOP'
+                : 'SPIN' }}
+
+            </span>
+
+
+            <span class="center-arrow">
+              ↻
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             WHEEL HINT
+             ================================================= -->
+
+        <div class="wheel-hint">
+
+          <span class="hint-icon">
+            ↔
+          </span>
+
+          <span>
+            Drag to explore
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =====================================================
+           ACTIVE IMAGE INFORMATION
+           ===================================================== -->
+
+      <div
+        class="experience-card"
+        *ngIf="activeItem"
+      >
+
+        <div class="experience-card-inner">
+
+
+          <div class="experience-number">
+
+            <span>
+              {{ (activeIndex + 1)
+                .toString()
+                .padStart(2, '0') }}
+            </span>
+
+            <div></div>
+
+            <span>
+              {{ galleryItems.length
+                .toString()
+                .padStart(2, '0') }}
+            </span>
+
+          </div>
+
+
+
+          <div class="experience-copy">
+
+            <span class="image-category">
+
+              {{ activeItem.category }}
+
+            </span>
+
+
+            <h3>
+
+              {{ activeItem.title }}
+
+            </h3>
+
+
+            <p>
+
+              {{ activeItem.description }}
+
+            </p>
+
+          </div>
+
+
+
+          <button
+            type="button"
+            class="view-button"
+
+            (click)="
+              openImage(activeItem);
+              $event.stopPropagation()
+            "
+          >
+
+            <span>
+              View
+            </span>
+
+            <span class="view-arrow">
+              ↗
+            </span>
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =====================================================
+           NAVIGATION
+           ===================================================== -->
+
+      <div class="gallery-navigation">
+
+        <button
+          type="button"
+          class="nav-button"
+
+          (click)="previousSlide()"
+
+          aria-label="Previous gallery image"
+        >
+
+          <span>←</span>
+
+        </button>
+
+
+        <div class="navigation-line">
+
+          <div
+            class="navigation-progress"
+
+            [style.width.%]="
+              ((activeIndex + 1) /
+              galleryItems.length) * 100
+            "
+          ></div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="nav-button"
+
+          (click)="nextSlide()"
+
+          aria-label="Next gallery image"
+        >
+
+          <span>→</span>
+
+        </button>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================================
+       CLOSING EXPERIENCE
+       ========================================================= -->
+
+  <section class="closing-section">
+
+    <div class="closing-glass">
+
+      <span class="closing-kicker">
+        YOUR LITTLE ESCAPE
+      </span>
+
+
+      <h2>
+
+        Come for the coffee.
+        <span>Stay for the feeling.</span>
+
+      </h2>
+
+
+      <p>
+
+        Find a corner, order something beautiful
+        and let the afternoon slow down.
+
+      </p>
+
+
+      <a
+        routerLink="/contact"
+        class="visit-button"
+      >
+
+        <span>
+          Plan Your Visit
+        </span>
+
+        <span>
+          →
+        </span>
+
+      </a>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================================
+       LOADING
+       ========================================================= -->
+
+  <section
+    class="gallery-loading"
+    *ngIf="isLoading"
+  >
+
+    <div class="loading-wheel"></div>
+
+    <span>
+      Preparing your table...
+    </span>
+
+  </section>
+
+
+
+  <!-- =========================================================
+       LIGHTBOX
+       ========================================================= -->
+
+  <div
+    class="lightbox"
+
+    *ngIf="selectedImage"
+
+    (click)="closeImage()"
+  >
+
+
+    <button
+      type="button"
+
+      class="lightbox-close"
+
+      (click)="
+        closeImage();
+        $event.stopPropagation()
+      "
+
+      aria-label="Close image"
+    >
+
+      ×
+
+    </button>
+
+
+
+    <button
+      type="button"
+
+      class="lightbox-nav lightbox-prev"
+
+      (click)="
+        previousLightboxImage();
+        $event.stopPropagation()
+      "
+
+      aria-label="Previous image"
+    >
+
+      ←
+
+    </button>
+
+
+
+    <div
+      class="lightbox-content"
+
+      (click)="$event.stopPropagation()"
+    >
+
+      <div class="lightbox-image-wrap">
+
+        <img
+          [src]="selectedImage.image"
+
+          [alt]="
+            selectedImage.altText ||
+            selectedImage.title ||
+            'Brew & Bloom ambience'
+          "
+        />
+
+      </div>
+
+
+      <div class="lightbox-caption">
+
+        <span>
+          {{ selectedImage.category }}
+        </span>
+
+        <h3>
+          {{ selectedImage.title }}
+        </h3>
+
+      </div>
+
+    </div>
+
+
+
+    <button
+      type="button"
+
+      class="lightbox-nav lightbox-next"
+
+      (click)="
+        nextLightboxImage();
+        $event.stopPropagation()
+      "
+
+      aria-label="Next image"
+    >
+
+      →
+
+    </button>
+
+  </div>
+
+</section>

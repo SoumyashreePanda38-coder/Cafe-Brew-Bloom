@@ -1,0 +1,33 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <img
+          *ngIf="cafe?.logo"
+          [src]="cafe?.logo || ''"
+          [alt]="cafe?.name || 'Café logo'"
+          [title]="cafe?.name || 'Café logo'"
+          class="footer-logo">
+        <div>
+          <h3>{{ cafe?.name || 'Café' }}</h3>
+          <p>{{ cafe?.tagline || 'Fresh coffee, food, and moments' }}</p>
+        </div>
+      </div>
+      <div class="footer-contact">
+        <a *ngIf="cafe?.contact?.phone" [href]="'tel:' + (cafe?.contact?.phone || '')">
+          {{ cafe?.contact?.phone }}
+        </a>
+        <a *ngIf="cafe?.contact?.email" [href]="'mailto:' + (cafe?.contact?.email || '')">
+          {{ cafe?.contact?.email }}
+        </a>
+        <p *ngIf="cafe?.location">
+          {{ cafe?.location?.address || '' }}, {{ cafe?.location?.city || '' }}
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© {{ currentYear }} {{ cafe?.name || 'Café' }}. All rights reserved.</span>
+      <a href="#home">Back to top ↑</a>
+    </div>
+  </div>
+</footer>

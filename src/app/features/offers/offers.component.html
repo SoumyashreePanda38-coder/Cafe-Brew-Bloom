@@ -1,0 +1,798 @@
+<section class="offers-page">
+
+  <!-- ========================================================
+       ATMOSPHERIC BACKGROUND
+  ========================================================= -->
+
+  <div class="background-glow glow-one"></div>
+  <div class="background-glow glow-two"></div>
+  <div class="background-glow glow-three"></div>
+
+  <div class="noise"></div>
+
+
+  <!-- ========================================================
+       HERO
+  ========================================================= -->
+
+  <section class="offers-hero">
+
+    <!-- Decorative rings -->
+
+    <div class="hero-ring hero-ring-one"></div>
+    <div class="hero-ring hero-ring-two"></div>
+    <div class="hero-ring hero-ring-three"></div>
+
+
+    <!-- Floating particles -->
+
+    <span class="particle particle-one"></span>
+    <span class="particle particle-two"></span>
+    <span class="particle particle-three"></span>
+    <span class="particle particle-four"></span>
+    <span class="particle particle-five"></span>
+
+
+    <div class="hero-content">
+
+      <div class="hero-eyebrow">
+
+        <span class="eyebrow-line"></span>
+
+        <span>
+          BREW & BLOOM
+        </span>
+
+        <span class="eyebrow-dot"></span>
+
+        <span>
+          SPECIAL OFFERS
+        </span>
+
+        <span class="eyebrow-line"></span>
+
+      </div>
+
+
+      <h1 class="hero-title">
+
+        <span class="title-line">
+          A little
+        </span>
+
+        <span class="title-line title-accent">
+          extra.
+        </span>
+
+        <span class="title-line">
+          Just for you.
+        </span>
+
+      </h1>
+
+
+      <p class="hero-description">
+
+        Beautiful coffee.
+        Delicious food.
+        And a few little reasons
+        to stay a little longer.
+
+      </p>
+
+
+      <button
+        type="button"
+        class="hero-button"
+        (click)="scrollToOffers()"
+      >
+
+        <span class="button-shine"></span>
+
+        <span>
+          Discover the offers
+        </span>
+
+        <span class="button-circle">
+          ↓
+        </span>
+
+      </button>
+
+    </div>
+
+
+    <!-- Left floating badge -->
+
+    <div class="floating-stamp stamp-left">
+
+      <div class="stamp-inner">
+
+        <span>
+          GOOD
+        </span>
+
+        <strong>
+          DEALS
+        </strong>
+
+        <span>
+          GOOD
+        </span>
+
+        <span>
+          MOMENTS
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- Right floating badge -->
+
+    <div class="floating-stamp stamp-right">
+
+      <div class="stamp-inner">
+
+        <span>
+          FRESHLY
+        </span>
+
+        <strong>
+          BREWED
+        </strong>
+
+        <span>
+          EVERY
+        </span>
+
+        <span>
+          DAY
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- Bottom scroll -->
+
+    <div class="hero-scroll">
+
+      <span>
+        SCROLL
+      </span>
+
+      <div class="scroll-track">
+        <span></span>
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ========================================================
+       FEATURED OFFER
+  ========================================================= -->
+
+  <section
+    class="signature-section"
+    *ngIf="featuredOffer"
+  >
+
+    <div class="section-number">
+      01
+    </div>
+
+
+    <div class="section-intro">
+
+      <span>
+        THE ONE EVERYONE TALKS ABOUT
+      </span>
+
+      <h2>
+        Our
+        <em>signature</em>
+        offer.
+      </h2>
+
+    </div>
+
+
+    <article class="signature-card">
+
+      <!-- Decorative image panel -->
+
+      <div class="signature-visual">
+
+        <img
+          [src]="
+            featuredOffer.image ||
+            'assets/common/images/image-placeholder.jpg'
+          "
+          [alt]="featuredOffer.title"
+        />
+
+
+        <div class="visual-overlay"></div>
+
+
+        <div class="visual-top">
+
+          <span>
+            BREW & BLOOM
+          </span>
+
+          <span>
+            EST. 2026
+          </span>
+
+        </div>
+
+
+        <!-- Giant discount -->
+
+        <div class="giant-discount">
+
+          <span class="discount-small">
+            SAVE
+          </span>
+
+          <strong>
+            {{ getDiscountText(featuredOffer) }}
+          </strong>
+
+          <span class="discount-off">
+            {{ getDiscountLabel(featuredOffer) }}
+          </span>
+
+        </div>
+
+
+        <!-- Circular seal -->
+
+        <div class="offer-seal">
+
+          <div class="seal-ring"></div>
+
+          <div class="seal-content">
+
+            <span>
+              SPECIAL
+            </span>
+
+            <strong>
+              BREW
+            </strong>
+
+            <span>
+              & BLOOM
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Content -->
+
+      <div class="signature-content">
+
+        <div class="signature-top">
+
+          <span class="live-badge">
+
+            <i></i>
+
+            FEATURED
+
+          </span>
+
+
+          <span
+            class="days-left"
+            *ngIf="
+              getDaysRemaining(featuredOffer) > 0
+            "
+          >
+
+            {{ getDaysRemaining(featuredOffer) }}
+            DAYS LEFT
+
+          </span>
+
+        </div>
+
+
+        <h3>
+          {{ featuredOffer.title }}
+        </h3>
+
+
+        <p class="signature-description">
+
+          {{ featuredOffer.description }}
+
+        </p>
+
+
+        <!-- Coupon -->
+
+        <div
+          class="signature-coupon"
+          *ngIf="featuredOffer.promoCode"
+        >
+
+          <span class="coupon-label">
+            YOUR SECRET CODE
+          </span>
+
+
+          <button
+            type="button"
+            class="coupon-box"
+            (click)="copyCode(featuredOffer)"
+          >
+
+            <span>
+              {{ featuredOffer.promoCode }}
+            </span>
+
+            <span>
+
+              {{
+                copiedOfferId ===
+                featuredOffer.id
+                  ? 'COPIED ✓'
+                  : 'COPY'
+              }}
+
+            </span>
+
+          </button>
+
+        </div>
+
+
+        <!-- Date -->
+
+        <div class="validity">
+
+          <div>
+
+            <span>
+              AVAILABLE
+            </span>
+
+            <strong>
+              {{
+                featuredOffer.startDate
+                  ? (featuredOffer.startDate | date:'dd MMM yyyy')
+                  : 'NOW'
+              }}
+            </strong>
+
+          </div>
+
+
+          <div class="validity-line"></div>
+
+
+          <div>
+
+            <span>
+              UNTIL
+            </span>
+
+            <strong>
+              {{
+                featuredOffer.endDate
+                  ? (featuredOffer.endDate | date:'dd MMM yyyy')
+                  : 'ONGOING'
+              }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <a
+          routerLink="/menu"
+          class="signature-button"
+        >
+
+          <span>
+            Explore the Menu
+          </span>
+
+          <span>
+            →
+          </span>
+
+        </a>
+
+      </div>
+
+    </article>
+
+  </section>
+
+
+
+  <!-- ========================================================
+       OFFER COLLECTION
+  ========================================================= -->
+
+  <section
+    id="offer-collection"
+    class="offer-collection"
+  >
+
+    <div class="collection-heading">
+
+      <div>
+
+        <div class="section-number">
+          02
+        </div>
+
+        <span class="collection-kicker">
+          MORE WAYS TO TREAT YOURSELF
+        </span>
+
+        <h2>
+          Pick your
+          <em>moment.</em>
+        </h2>
+
+      </div>
+
+
+      <p>
+        Whether you're here for your first
+        coffee of the morning or a slow
+        evening with friends, there's
+        always something waiting for you.
+      </p>
+
+    </div>
+
+
+
+    <!-- ======================================================
+         OFFER CARDS
+    ======================================================= -->
+
+    <div
+      class="offer-grid"
+      *ngIf="regularOffers.length"
+    >
+
+      <article
+        class="offer-card"
+        *ngFor="
+          let offer of regularOffers;
+          let i = index;
+          trackBy: trackByOfferId
+        "
+        [class.card-hovered]="
+          hoveredOfferId === offer.id
+        "
+        (mouseenter)="
+          onOfferEnter(offer.id)
+        "
+        (mouseleave)="
+          onOfferLeave()
+        "
+      >
+
+        <!-- Card image -->
+
+        <div class="card-image">
+
+          <img
+            [src]="
+              offer.image ||
+              'assets/common/images/image-placeholder.jpg'
+            "
+            [alt]="offer.title"
+          />
+
+          <div class="image-overlay"></div>
+
+
+          <span class="card-number">
+            0{{ i + 2 }}
+          </span>
+
+
+          <span class="card-discount">
+
+            {{ getDiscountText(offer) }}
+
+            <small>
+              {{ getDiscountLabel(offer) }}
+            </small>
+
+          </span>
+
+        </div>
+
+
+        <!-- Card body -->
+
+        <div class="card-body">
+
+          <div class="card-category">
+            SPECIAL OFFER
+          </div>
+
+
+          <h3>
+            {{ offer.title }}
+          </h3>
+
+
+          <p>
+            {{ offer.description }}
+          </p>
+
+
+          <!-- Code -->
+
+          <div
+            class="mini-code"
+            *ngIf="offer.promoCode"
+          >
+
+            <span>
+              CODE
+            </span>
+
+            <button
+              type="button"
+              (click)="copyCode(offer)"
+            >
+
+              <strong>
+                {{ offer.promoCode }}
+              </strong>
+
+              <span>
+                {{
+                  copiedOfferId === offer.id
+                    ? 'COPIED'
+                    : 'COPY'
+                }}
+              </span>
+
+            </button>
+
+          </div>
+
+
+          <!-- Bottom -->
+
+          <div class="card-bottom">
+
+            <div class="card-validity">
+
+              <span>
+                VALID UNTIL
+              </span>
+
+              <strong>
+                {{
+                  offer.endDate
+                    ? (offer.endDate | date:'dd MMM yyyy')
+                    : 'ONGOING'
+                }}
+              </strong>
+
+            </div>
+
+
+            <a routerLink="/menu">
+
+              <span>
+                VIEW
+              </span>
+
+              <strong>
+                →
+              </strong>
+
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- Hover glow -->
+
+        <div class="card-hover-glow"></div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ========================================================
+       EXPERIENCE SECTION
+  ========================================================= -->
+
+  <section class="experience-section">
+
+    <div class="experience-card">
+
+      <div class="experience-number">
+        03
+      </div>
+
+
+      <div class="experience-copy">
+
+        <span class="experience-kicker">
+          MORE THAN A DISCOUNT
+        </span>
+
+        <h2>
+          Come for
+          <em>the offer.</em>
+          Stay for
+          <span>the feeling.</span>
+        </h2>
+
+        <p>
+          Because the best café memories aren't
+          really about what you saved.
+          They're about who you shared it with,
+          what you talked about and how long
+          you decided to stay.
+        </p>
+
+
+        <a routerLink="/gallery">
+
+          Explore the café
+
+          <span>
+            ↗
+          </span>
+
+        </a>
+
+      </div>
+
+
+      <!-- Giant decorative cup -->
+
+      <div class="coffee-orbit">
+
+        <div class="orbit-circle circle-large"></div>
+        <div class="orbit-circle circle-medium"></div>
+        <div class="orbit-circle circle-small"></div>
+
+
+        <div class="coffee-cup">
+
+          <div class="cup-steam steam-one"></div>
+          <div class="cup-steam steam-two"></div>
+          <div class="cup-steam steam-three"></div>
+
+          <div class="cup-body">
+            <span>BB</span>
+          </div>
+
+          <div class="cup-handle"></div>
+
+          <div class="cup-shadow"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ========================================================
+       FINAL CTA
+  ========================================================= -->
+
+  <section class="final-section">
+
+    <div class="final-decoration">
+      ✦
+    </div>
+
+
+    <span class="final-kicker">
+      GOOD COFFEE IS ALWAYS A GOOD IDEA
+    </span>
+
+
+    <h2>
+
+      Your next
+      <em>good moment</em>
+      starts here.
+
+    </h2>
+
+
+    <p>
+      Pick your offer.
+      Bring your people.
+      We'll take care of the coffee.
+    </p>
+
+
+    <div class="final-buttons">
+
+      <a
+        routerLink="/menu"
+        class="final-primary"
+      >
+
+        Explore Menu
+
+        <span>
+          →
+        </span>
+
+      </a>
+
+
+      <a
+        routerLink="/contact"
+        class="final-secondary"
+      >
+        Find Us
+      </a>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ========================================================
+       LOADING
+  ========================================================= -->
+
+  <div
+    class="loading-screen"
+    *ngIf="isLoading"
+  >
+
+    <div class="loading-cup">
+
+      <div></div>
+
+      <span>
+        BB
+      </span>
+
+    </div>
+
+    <p>
+      Brewing something special...
+    </p>
+
+  </div>
+
+</section>

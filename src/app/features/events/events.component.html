@@ -1,0 +1,205 @@
+
+<div class="events-page">
+  <div class="events-backdrop" aria-hidden="true">
+    <span class="orb orb-one"></span>
+    <span class="orb orb-two"></span>
+    <span class="orb orb-three"></span>
+    <div class="grain"></div>
+  </div>
+
+  <header class="events-hero">
+    <div class="hero-copy reveal-up">
+      <div class="eyebrow-line-wrap">
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow-text">Curated experiences</span>
+        <span class="eyebrow-line"></span>
+      </div>
+
+      <h1>
+        Moments that feel like
+        <span>part of the story.</span>
+      </h1>
+
+      <p>
+        From slow mornings to candlelit evenings, every gathering at Brew & Bloom is designed to feel warm,
+        elevated, and unforgettable.
+      </p>
+
+      <div class="hero-actions">
+        <a class="primary-btn" href="#upcoming-events">
+          Explore gatherings
+          <span>→</span>
+        </a>
+        <a class="secondary-btn" href="mailto:cafebrew_bloom@gmail.com?subject=Event%20Enquiry">
+          Host with us
+        </a>
+      </div>
+
+      <ul class="hero-metrics">
+        <li *ngFor="let metric of metrics">
+          <strong>{{ metric.value }}</strong>
+          <span>{{ metric.label }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="hero-showcase reveal-up delay-1">
+      <div class="showcase-frame">
+        <img
+          [src]="featuredEvents[0] ? featuredEvents[0].image : 'assets/cafes/generic/gallery/ambience-01.jpg'"
+          [alt]="featuredEvents[0] ? featuredEvents[0].title : 'Café event ambience'"
+          loading="eager"
+        />
+
+        <div class="glass-card glass-card-top">
+          <span class="glass-kicker">Tonight</span>
+          <strong>{{ featuredEvents[0] ? featuredEvents[0].title : 'Signature night' }}</strong>
+          <small>{{ featuredEvents[0] ? getEventDateLabel(featuredEvents[0].date) : 'Candlelight and coffee' }}</small>
+        </div>
+
+        <div class="glass-card glass-card-bottom">
+          <span class="mini-label">Atmosphere</span>
+          <strong>Warm • intimate • lively</strong>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="experience-strip">
+    <div class="strip-item" *ngFor="let item of experiencePillars">
+      <span>{{ item.title }}</span>
+      <small>{{ item.detail }}</small>
+    </div>
+  </section>
+
+  <section class="featured-section" *ngIf="featuredEvents.length > 0">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">Featured</span>
+        <h2>Designed for memorable evenings.</h2>
+      </div>
+      <p>Small rituals, bold flavours, and a room made for conversation.</p>
+    </div>
+
+    <article class="spotlight-card" *ngFor="let event of featuredEvents">
+      <div class="spotlight-image">
+        <img
+          [src]="event.image || 'assets/common/images/image-placeholder.jpg'"
+          [alt]="event.title"
+          loading="lazy"
+        />
+        <div class="image-badge">Featured experience</div>
+      </div>
+
+      <div class="spotlight-copy">
+        <span class="spotlight-tag">Special gathering</span>
+        <h3>{{ event.title }}</h3>
+        <p>{{ event.description }}</p>
+
+        <div class="info-grid">
+          <div class="info-box">
+            <small>When</small>
+            <strong>{{ getEventDateLabel(event.date) }}</strong>
+            <span>{{ getEventTime(event) }}</span>
+          </div>
+          <div class="info-box">
+            <small>Where</small>
+            <strong>{{ event.location || 'Brew & Bloom' }}</strong>
+            <span>{{ event.organizer || 'Curated by our team' }}</span>
+          </div>
+        </div>
+
+        <div class="spotlight-actions">
+          <span class="reserve-mark">Reserve your seat</span>
+          <a [href]="getBookingLink(event)" [attr.target]="event.bookingUrl ? '_blank' : null" [attr.rel]="event.bookingUrl ? 'noopener noreferrer' : null">
+            Get in touch
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="upcoming-section" id="upcoming-events">
+    <div class="section-head upcoming-head">
+      <div>
+        <span class="section-kicker">Calendar</span>
+        <h2>What’s coming up.</h2>
+      </div>
+      <p>Fresh experiences planned for slow sips, big laughs, and beautiful company.</p>
+    </div>
+
+    <div class="events-loading" *ngIf="loading">
+      <div class="loading-cup">☕</div>
+      <p>Brewing up something special...</p>
+    </div>
+
+    <div class="events-grid" *ngIf="!loading && upcomingEvents.length > 0">
+      <article class="event-card" *ngFor="let event of upcomingEvents; trackBy: trackByEvent">
+        <div class="event-media">
+          <img [src]="event.image || 'assets/common/images/image-placeholder.jpg'" [alt]="event.title" loading="lazy" />
+          <div class="date-pill">
+            <strong>{{ getEventDay(event.date) }}</strong>
+            <span>{{ getEventMonth(event.date) }}</span>
+          </div>
+        </div>
+
+        <div class="event-body">
+          <span class="event-meta">{{ getEventMonth(event.date) }} · {{ getEventTime(event) }}</span>
+          <h3>{{ event.title }}</h3>
+          <p>{{ event.description }}</p>
+
+          <div class="event-footer-meta">
+            <span>📍 {{ event.location || 'Brew & Bloom' }}</span>
+            <span *ngIf="event.organizer">🎶 {{ event.organizer }}</span>
+          </div>
+
+          <a class="event-link" [href]="getBookingLink(event)" [attr.target]="event.bookingUrl ? '_blank' : null" [attr.rel]="event.bookingUrl ? 'noopener noreferrer' : null">
+            Reserve
+            <span>↗</span>
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <div class="events-empty" *ngIf="!loading && upcomingEvents.length === 0">
+      <div class="empty-icon">☕</div>
+      <h3>Something lovely is brewing.</h3>
+      <p>We do not have any upcoming events listed right now. Check back soon for the next gathering.</p>
+      <a href="mailto:cafebrew_bloom@gmail.com">
+        Stay connected <span>↗</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="host-section">
+    <div class="host-copy">
+      <span class="section-kicker">Private moments</span>
+      <h2>Celebrate with a table that feels made just for you.</h2>
+      <p>
+        Whether it is a birthday, a thoughtful team catch-up, or a quiet evening of music and dessert, we create
+        a setting that feels personal, polished, and easy.
+      </p>
+      <a class="primary-btn" href="mailto:cafebrew_bloom@gmail.com?subject=Event%20Enquiry">
+        Plan with us
+        <span>→</span>
+      </a>
+    </div>
+
+    <div class="host-visual" aria-hidden="true">
+      <div class="ring ring-one"></div>
+      <div class="ring ring-two"></div>
+      <div class="coffee-cup">☕</div>
+      <span class="spark spark-one">✦</span>
+      <span class="spark spark-two">✧</span>
+      <span class="spark spark-three">✳</span>
+    </div>
+  </section>
+
+  <section class="signature-band">
+    <span class="flower">✦</span>
+    <p>Good coffee. Good company. Good stories.</p>
+    <h3>See you at <span>Brew & Bloom.</span></h3>
+  </section>
+</div>
+

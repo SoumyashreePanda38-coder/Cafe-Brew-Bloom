@@ -1,0 +1,574 @@
+<div class="contact-page">
+
+  <!-- BACKGROUND ATMOSPHERE -->
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <div class="ambient ambient-three"></div>
+  <div class="contact-grain"></div>
+
+
+  <!-- ================================================= -->
+  <!-- HERO -->
+  <!-- ================================================= -->
+
+  <section class="contact-hero">
+
+    <div class="hero-content">
+
+      <span class="hero-eyebrow">
+        <span class="eyebrow-line"></span>
+        BREW & BLOOM · COME SAY HELLO
+        <span class="eyebrow-line"></span>
+      </span>
+
+      <h1>
+        Your favourite<br>
+        <em>corner awaits.</em>
+      </h1>
+
+      <p>
+        A little coffee, a little conversation and a place
+        to make beautiful memories. We would love to see you.
+      </p>
+
+      <a href="#contact-details" class="hero-button">
+        Find Your Way Here
+        <span>↘</span>
+      </a>
+
+    </div>
+
+
+    <div class="hero-visual">
+
+      <div class="hero-ring ring-one"></div>
+      <div class="hero-ring ring-two"></div>
+      <div class="hero-ring ring-three"></div>
+
+      <div class="hero-coffee">
+        <span>☕</span>
+      </div>
+
+      <div class="floating-card floating-card-one">
+        <span>✦</span>
+        <div>
+          <strong>Freshly brewed</strong>
+          <small>Every single day</small>
+        </div>
+      </div>
+
+      <div class="floating-card floating-card-two">
+        <span>♡</span>
+        <div>
+          <strong>Your happy place</strong>
+          <small>Just around the corner</small>
+        </div>
+      </div>
+
+      <div class="hero-orbit-dot"></div>
+
+    </div>
+
+    <div class="hero-bottom">
+      <span class="scroll-line"></span>
+      A LITTLE MORE ABOUT US
+      <span class="scroll-line"></span>
+    </div>
+
+  </section>
+
+
+  <!-- ================================================= -->
+  <!-- CONTACT DETAILS -->
+  <!-- ================================================= -->
+
+  <section class="contact-details-section" id="contact-details">
+
+    <div class="section-heading">
+
+      <span class="section-kicker">
+        WE'RE JUST A MESSAGE AWAY
+      </span>
+
+      <h2>
+        Let's make <em>connections.</em>
+      </h2>
+
+      <p>
+        Whether you have a question, want to plan a visit
+        or simply want to say hello, we're all ears.
+      </p>
+
+    </div>
+
+
+    <div class="contact-card-grid">
+
+      <!-- PHONE -->
+
+      <a
+        class="contact-info-card"
+        [href]="'tel:' + phone">
+
+        <div class="info-icon">☎</div>
+
+        <span class="info-label">GIVE US A CALL</span>
+
+        <h3>{{ phone }}</h3>
+
+        <p>
+          Have a quick question? We'd love to hear from you.
+        </p>
+
+        <span class="info-action">
+          Call us <span>↗</span>
+        </span>
+
+      </a>
+
+
+      <!-- EMAIL -->
+
+      <a
+        class="contact-info-card"
+        [href]="'mailto:' + email">
+
+        <div class="info-icon">✉</div>
+
+        <span class="info-label">DROP US A LINE</span>
+
+        <h3 class="email-value">{{ email }}</h3>
+
+        <p>
+          For enquiries, suggestions or just a friendly hello.
+        </p>
+
+        <span class="info-action">
+          Send an email <span>↗</span>
+        </span>
+
+      </a>
+
+
+      <!-- INSTAGRAM -->
+
+      <a
+        class="contact-info-card"
+        [href]="instagramUrl"
+        target="_blank"
+        rel="noopener noreferrer">
+
+        <div class="info-icon">◎</div>
+
+        <span class="info-label">FOLLOW OUR LITTLE WORLD</span>
+
+        <h3>@{{ instagramHandle }}</h3>
+
+        <p>
+          Coffee moments, delicious bites and everyday café stories.
+        </p>
+
+        <span class="info-action">
+          Follow along <span>↗</span>
+        </span>
+
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================================================= -->
+  <!-- LOCATION + MAP -->
+  <!-- ================================================= -->
+
+  <section class="location-section">
+
+    <div class="location-layout">
+
+      <div class="location-content">
+
+        <span class="section-kicker">
+          COME FIND US
+        </span>
+
+        <h2>
+          A little escape<br>
+          <em>in the heart of Patia.</em>
+        </h2>
+
+        <p class="location-description">
+          Your next coffee break is closer than you think.
+          Find us near Silicon University, Patia,
+          Bhubaneswar.
+        </p>
+
+
+        <div class="location-address">
+
+          <div class="location-icon">⌖</div>
+
+          <div>
+            <span>OUR LOCATION</span>
+
+            <p>{{ address }}</p>
+          </div>
+
+        </div>
+
+
+        <a
+          [href]="mapUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="direction-button">
+
+          Get Directions
+          <span>↗</span>
+
+        </a>
+
+
+        <div class="location-note">
+          <span>✦</span>
+          Good coffee is always worth the little journey.
+        </div>
+
+      </div>
+
+
+      <div class="map-card">
+
+        <div class="map-topbar">
+          <div>
+            <span class="map-label">FIND YOUR WAY</span>
+            <h3>Brew & Bloom</h3>
+          </div>
+
+          <span class="map-pin">⌖</span>
+        </div>
+
+        <div class="map-frame">
+
+          <iframe
+            [src]="mapEmbedUrl"
+            title="Map showing Silicon University, Patia, Bhubaneswar"
+            width="100%"
+            height="100%"
+            style="border: 0;"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+
+        </div>
+
+        <div class="map-bottom">
+          <span>📍</span>
+          Silicon Hills, Patia, Bhubaneswar
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================================================= -->
+  <!-- OPENING HOURS -->
+  <!-- ================================================= -->
+
+  <section class="hours-section">
+
+    <div class="hours-decoration">
+      <div class="hours-circle"></div>
+      <div class="hours-circle circle-small"></div>
+      <span class="hours-sparkle sparkle-one">✦</span>
+      <span class="hours-sparkle sparkle-two">✧</span>
+    </div>
+
+
+    <div class="hours-layout">
+
+      <div class="hours-intro">
+
+        <span class="section-kicker">
+          THE DOORS ARE OPEN
+        </span>
+
+        <h2>
+          Make time for<br>
+          <em>something lovely.</em>
+        </h2>
+
+        <p>
+          From your first morning thought to your evening
+          coffee cravings, there's always time for a café break.
+        </p>
+
+        <div class="hours-highlight">
+          <span class="clock-icon">◷</span>
+
+          <div>
+            <strong>10:30 AM – 9:30 PM</strong>
+            <small>Every day of the week</small>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="hours-card">
+
+        <div class="hours-card-heading">
+          <div>
+            <span>BREW & BLOOM</span>
+            <h3>Opening Hours</h3>
+          </div>
+
+          <div class="hours-status">
+            <span class="status-dot"></span>
+            DAILY
+          </div>
+        </div>
+
+
+        <div class="hours-list">
+
+          <div
+            class="hours-row"
+            *ngFor="
+              let item of openingHours;
+              trackBy: trackByDay
+            ">
+
+            <span>{{ item.day }}</span>
+
+            <span class="hours-dash"></span>
+
+            <strong>{{ item.time }}</strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="hours-card-footer">
+          <span>☕</span>
+          Same warm welcome, seven days a week.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================================================= -->
+  <!-- CONTACT FORM -->
+  <!-- ================================================= -->
+
+  <section class="message-section" id="send-message">
+
+    <div class="message-layout">
+
+
+      <!-- LEFT CONTENT -->
+
+      <div class="message-intro">
+
+        <span class="section-kicker">
+          WE'RE LISTENING
+        </span>
+
+        <h2>
+          Have something<br>
+          <em>on your mind?</em>
+        </h2>
+
+        <p>
+          Questions, feedback, suggestions or a little
+          appreciation — every message means a lot to us.
+        </p>
+
+        <div class="message-quote">
+          <span>“</span>
+
+          <p>
+            Every great connection begins with a simple hello.
+          </p>
+        </div>
+
+        <div class="message-decoration">
+          <span>✦</span>
+          <span>✧</span>
+          <span>✦</span>
+        </div>
+
+      </div>
+
+
+      <!-- FORM -->
+
+      <div class="message-form-card">
+
+        <div class="form-heading">
+
+          <div>
+            <span>LET'S TALK</span>
+            <h3>Send us a message</h3>
+          </div>
+
+          <div class="form-icon">✉</div>
+
+        </div>
+
+
+        <form
+          class="contact-form"
+          (submit)="sendMessage($event)">
+
+          <div class="form-row">
+
+            <div class="form-field">
+
+              <label for="contact-name">
+                YOUR NAME
+              </label>
+
+              <input
+                type="text"
+                id="contact-name"
+                name="name"
+                placeholder="Your name"
+                autocomplete="name"
+                required>
+
+            </div>
+
+
+            <div class="form-field">
+
+              <label for="contact-email">
+                EMAIL ADDRESS
+              </label>
+
+              <input
+                type="email"
+                id="contact-email"
+                name="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-field">
+
+            <label for="contact-subject">
+              SUBJECT
+            </label>
+
+            <input
+              type="text"
+              id="contact-subject"
+              name="subject"
+              placeholder="What would you like to talk about?"
+              required>
+
+          </div>
+
+
+          <div class="form-field">
+
+            <label for="contact-message">
+              YOUR MESSAGE
+            </label>
+
+            <textarea
+              id="contact-message"
+              name="message"
+              rows="5"
+              placeholder="Write your message here..."
+              required>
+            </textarea>
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="send-button">
+
+            Send Your Message
+            <span>↗</span>
+
+          </button>
+
+
+          <p class="form-footnote">
+            Your message will be prepared in your default email app.
+          </p>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================================================= -->
+  <!-- FINAL CTA -->
+  <!-- ================================================= -->
+
+  <section class="contact-final">
+
+    <div class="final-coffee">☕</div>
+
+    <span class="section-kicker">
+      YOUR TABLE IS WAITING
+    </span>
+
+    <h2>
+      Coffee tastes better<br>
+      <em>when shared.</em>
+    </h2>
+
+    <p>
+      Bring your favourite people. We'll take care of the coffee.
+    </p>
+
+    <div class="final-actions">
+
+      <a
+        [href]="'tel:' + phone"
+        class="final-primary">
+        Call Us
+        <span>↗</span>
+      </a>
+
+      <a
+        [href]="instagramUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="final-secondary">
+        Follow Our Instagram
+        <span>↗</span>
+      </a>
+
+    </div>
+
+    <div class="final-signature">
+      BREW & BLOOM · FRESH COFFEE. GREAT FOOD. GOOD MOMENTS.
+    </div>
+
+  </section>
+
+</div>

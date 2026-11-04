@@ -1,0 +1,16 @@
+<article class="review-card">
+  <div class="review-header">
+    <img *ngIf="review.customerImage" [src]="review.customerImage" [alt]="review.customerName" class="customer-image">
+    <div><h3>{{ review.customerName }}</h3>
+      <div class="rating" [attr.aria-label]="review.rating + ' out of 5 stars'">
+        <span *ngFor="let star of getStars(); let i=index" [class.filled]="i < review.rating">★</span>
+      </div>
+    </div>
+  </div>
+  <p class="comment">“{{ review.comment }}”</p>
+  <div class="meta">
+    <span *ngIf="review.source">{{ review.source | titlecase }}</span>
+    <span *ngIf="review.date">{{ review.date | date:'mediumDate' }}</span>
+    <span *ngIf="review.isVerified" class="verified">✓ Verified</span>
+  </div>
+</article>

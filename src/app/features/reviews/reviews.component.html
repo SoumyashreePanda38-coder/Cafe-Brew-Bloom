@@ -1,0 +1,840 @@
+<section class="reviews-page">
+
+  <!-- BACKGROUND ATMOSPHERE -->
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <div class="ambient ambient-three"></div>
+  <div class="grain"></div>
+
+
+  <!-- =========================================
+       HERO
+  ========================================== -->
+
+  <section class="reviews-hero">
+
+    <div class="hero-inner">
+
+      <div class="hero-copy">
+
+        <div class="eyebrow">
+          <span class="eyebrow-line"></span>
+          THE BREW & BLOOM COMMUNITY
+          <span class="eyebrow-line"></span>
+        </div>
+
+        <h1>
+          Good coffee.
+          <br>
+          <em>Beautiful stories.</em>
+        </h1>
+
+        <p>
+          Every visit leaves a little memory.
+          Every guest has a story.
+          Here's a little love from the people
+          who make our café special.
+        </p>
+
+        <a href="#guest-wall" class="hero-button">
+          Explore Guest Stories
+          <span>↓</span>
+        </a>
+
+      </div>
+
+      <div class="hero-visual">
+
+        <div class="hero-circle circle-one"></div>
+        <div class="hero-circle circle-two"></div>
+
+        <div class="hero-coffee">
+          <span>☕</span>
+        </div>
+
+        <div class="floating-note note-one">
+          <span>★★★★★</span>
+          <strong>Made with love</strong>
+        </div>
+
+        <div class="floating-note note-two">
+          <span>♡</span>
+          Little moments matter
+        </div>
+
+        <div class="hero-stamp">
+          <span>GOOD</span>
+          <strong>VIBES</strong>
+          <span>ONLY</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="hero-bottom">
+      <span>SCROLL TO FEEL THE LOVE</span>
+      <span class="scroll-line"></span>
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       RATING OVERVIEW
+  ========================================== -->
+
+  <section class="rating-section">
+
+    <div class="rating-heading">
+
+      <span class="section-kicker">A LITTLE APPRECIATION</span>
+
+      <h2>
+        The love is
+        <em>mutual.</em>
+      </h2>
+
+      <p>
+        Thank you for making Brew & Bloom part of your everyday moments.
+      </p>
+
+    </div>
+
+    <div class="rating-dashboard">
+
+      <div class="rating-score">
+
+        <span class="score-label">OUR GUEST RATING</span>
+
+        <div class="score-number">
+          {{ averageRating || '0.0' }}
+          <span>/ 5</span>
+        </div>
+
+        <div class="score-stars">
+          <span *ngFor="let star of [1,2,3,4,5]">★</span>
+        </div>
+
+        <p>
+          Based on {{ reviews.length }} guest reviews
+        </p>
+
+      </div>
+
+      <div class="rating-breakdown">
+
+        <div
+          class="rating-row"
+          *ngFor="let rating of [5,4,3,2,1]"
+        >
+
+          <span>{{ rating }}</span>
+          <span class="breakdown-star">★</span>
+
+          <div class="rating-track">
+            <div
+              class="rating-fill"
+              [style.width.%]="getRatingPercentage(rating)"
+            ></div>
+          </div>
+
+          <span class="rating-count">
+            {{ getRatingCount(rating) }}
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="rating-decoration">
+        <span>“</span>
+        <p>
+          A happy guest is our favourite
+          kind of compliment.
+        </p>
+        <small>— BREW & BLOOM</small>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       ANIMATED REVIEW WALL
+  ========================================== -->
+
+  <section class="guest-wall" id="guest-wall">
+
+    <div class="wall-heading">
+
+      <div>
+        <span class="section-kicker">LITTLE NOTES OF HAPPINESS</span>
+
+        <h2>
+          Straight from
+          <em>the heart.</em>
+        </h2>
+      </div>
+
+      <p>
+        A collection of little moments,
+        shared by our lovely guests.
+      </p>
+
+    </div>
+
+
+    <div class="review-wall-layout">
+
+      <div class="wall-intro">
+
+        <div class="wall-number">
+          <span>01</span>
+          / GUEST STORIES
+        </div>
+
+        <h3>
+          Your words make
+          <em>our day.</em>
+        </h3>
+
+        <p>
+          From the first sip of coffee to the last
+          bite of dessert, every experience matters
+          to us.
+        </p>
+
+        <div class="wall-decoration">
+          <span>✳</span>
+          <span>✳</span>
+          <span>✳</span>
+        </div>
+
+        <div class="wall-caption">
+          BREWED WITH LOVE
+        </div>
+
+      </div>
+
+
+      <!-- VERTICAL REVIEW STREAM -->
+
+      <div class="review-stream" *ngIf="reviews.length > 0">
+
+        <!-- FIRST LANE -->
+
+        <div class="stream-lane lane-up">
+
+          <div class="stream-track">
+
+            <div class="stream-set">
+
+              <article
+                class="stream-card"
+                *ngFor="
+                  let review of firstReviewLane;
+                  trackBy: trackByReviewId
+                "
+              >
+
+                <div class="stream-card-top">
+
+                  <div class="stream-avatar">
+
+                    <img
+                      *ngIf="review.customerImage"
+                      [src]="review.customerImage"
+                      [alt]="review.customerName"
+                    >
+
+                    <span *ngIf="!review.customerImage">
+                      {{ getInitials(review.customerName) }}
+                    </span>
+
+                  </div>
+
+                  <div class="stream-customer">
+
+                    <strong>{{ review.customerName }}</strong>
+
+                    <small>
+                      {{ getSourceLabel(review.source) }}
+                    </small>
+
+                  </div>
+
+                  <div class="stream-stars">
+                    <span
+                      *ngFor="let star of [1,2,3,4,5]"
+                      [class.active]="star <= review.rating"
+                    >★</span>
+                  </div>
+
+                </div>
+
+                <div class="stream-quote">“</div>
+
+                <p>{{ review.comment }}</p>
+
+                <div class="stream-card-bottom">
+
+                  <span *ngIf="review.isVerified">
+                    <span class="verified-check">✓</span>
+                    Verified guest
+                  </span>
+
+                  <span *ngIf="review.date">
+                    {{ review.date | date:'dd MMM yyyy' }}
+                  </span>
+
+                </div>
+
+              </article>
+
+            </div>
+
+
+            <!-- DUPLICATE SET FOR CONTINUOUS MOVEMENT -->
+
+            <div class="stream-set" aria-hidden="true">
+
+              <article
+                class="stream-card"
+                *ngFor="
+                  let review of firstReviewLane;
+                  trackBy: trackByReviewId
+                "
+              >
+
+                <div class="stream-card-top">
+
+                  <div class="stream-avatar">
+
+                    <img
+                      *ngIf="review.customerImage"
+                      [src]="review.customerImage"
+                      alt=""
+                    >
+
+                    <span *ngIf="!review.customerImage">
+                      {{ getInitials(review.customerName) }}
+                    </span>
+
+                  </div>
+
+                  <div class="stream-customer">
+                    <strong>{{ review.customerName }}</strong>
+                    <small>{{ getSourceLabel(review.source) }}</small>
+                  </div>
+
+                  <div class="stream-stars">
+                    <span
+                      *ngFor="let star of [1,2,3,4,5]"
+                      [class.active]="star <= review.rating"
+                    >★</span>
+                  </div>
+
+                </div>
+
+                <div class="stream-quote">“</div>
+
+                <p>{{ review.comment }}</p>
+
+                <div class="stream-card-bottom">
+                  <span *ngIf="review.isVerified">
+                    <span class="verified-check">✓</span>
+                    Verified guest
+                  </span>
+                  <span *ngIf="review.date">
+                    {{ review.date | date:'dd MMM yyyy' }}
+                  </span>
+                </div>
+
+              </article>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- SECOND LANE -->
+
+        <div class="stream-lane lane-down">
+
+          <div class="stream-track">
+
+            <div class="stream-set">
+
+              <article
+                class="stream-card alternate-card"
+                *ngFor="
+                  let review of secondReviewLane;
+                  trackBy: trackByReviewId
+                "
+              >
+
+                <div class="stream-card-top">
+
+                  <div class="stream-avatar avatar-alt">
+
+                    <img
+                      *ngIf="review.customerImage"
+                      [src]="review.customerImage"
+                      [alt]="review.customerName"
+                    >
+
+                    <span *ngIf="!review.customerImage">
+                      {{ getInitials(review.customerName) }}
+                    </span>
+
+                  </div>
+
+                  <div class="stream-customer">
+                    <strong>{{ review.customerName }}</strong>
+                    <small>{{ getSourceLabel(review.source) }}</small>
+                  </div>
+
+                  <div class="stream-stars">
+                    <span
+                      *ngFor="let star of [1,2,3,4,5]"
+                      [class.active]="star <= review.rating"
+                    >★</span>
+                  </div>
+
+                </div>
+
+                <div class="stream-quote">“</div>
+
+                <p>{{ review.comment }}</p>
+
+                <div class="stream-card-bottom">
+
+                  <span *ngIf="review.isVerified">
+                    <span class="verified-check">✓</span>
+                    Verified guest
+                  </span>
+
+                  <span *ngIf="review.date">
+                    {{ review.date | date:'dd MMM yyyy' }}
+                  </span>
+
+                </div>
+
+              </article>
+
+            </div>
+
+
+            <div class="stream-set" aria-hidden="true">
+
+              <article
+                class="stream-card alternate-card"
+                *ngFor="
+                  let review of secondReviewLane;
+                  trackBy: trackByReviewId
+                "
+              >
+
+                <div class="stream-card-top">
+
+                  <div class="stream-avatar avatar-alt">
+
+                    <img
+                      *ngIf="review.customerImage"
+                      [src]="review.customerImage"
+                      alt=""
+                    >
+
+                    <span *ngIf="!review.customerImage">
+                      {{ getInitials(review.customerName) }}
+                    </span>
+
+                  </div>
+
+                  <div class="stream-customer">
+                    <strong>{{ review.customerName }}</strong>
+                    <small>{{ getSourceLabel(review.source) }}</small>
+                  </div>
+
+                  <div class="stream-stars">
+                    <span
+                      *ngFor="let star of [1,2,3,4,5]"
+                      [class.active]="star <= review.rating"
+                    >★</span>
+                  </div>
+
+                </div>
+
+                <div class="stream-quote">“</div>
+
+                <p>{{ review.comment }}</p>
+
+                <div class="stream-card-bottom">
+
+                  <span *ngIf="review.isVerified">
+                    <span class="verified-check">✓</span>
+                    Verified guest
+                  </span>
+
+                  <span *ngIf="review.date">
+                    {{ review.date | date:'dd MMM yyyy' }}
+                  </span>
+
+                </div>
+
+              </article>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="empty-reviews" *ngIf="!isLoading && reviews.length === 0">
+        <span>☕</span>
+        <h3>Our guest wall is waiting.</h3>
+        <p>Be the first to share your experience!</p>
+      </div>
+
+    </div>
+
+    <div class="wall-bottom-note">
+      <span></span>
+      A LITTLE LOVE GOES A LONG WAY
+      <span></span>
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       FEATURED GUEST QUOTES
+  ========================================== -->
+
+  <section class="featured-section" *ngIf="featuredReviews.length > 0">
+
+    <div class="featured-heading">
+      <span class="section-kicker">THE ONES WE TREASURE</span>
+
+      <h2>
+        Moments worth
+        <em>remembering.</em>
+      </h2>
+    </div>
+
+    <div class="featured-grid">
+
+      <article
+        class="featured-card"
+        *ngFor="
+          let review of featuredReviews;
+          trackBy: trackByReviewId
+        "
+      >
+
+        <span class="featured-quote">“</span>
+
+        <div class="featured-stars">
+          <span
+            *ngFor="let star of [1,2,3,4,5]"
+            [class.active]="star <= review.rating"
+          >★</span>
+        </div>
+
+        <p>{{ review.comment }}</p>
+
+        <div class="featured-customer">
+
+          <div class="featured-avatar">
+
+            <img
+              *ngIf="review.customerImage"
+              [src]="review.customerImage"
+              [alt]="review.customerName"
+            >
+
+            <span *ngIf="!review.customerImage">
+              {{ getInitials(review.customerName) }}
+            </span>
+
+          </div>
+
+          <div>
+            <strong>{{ review.customerName }}</strong>
+            <small>{{ getSourceLabel(review.source) }}</small>
+          </div>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       FEEDBACK FORM
+  ========================================== -->
+
+  <section class="feedback-section" id="share-review">
+
+    <div class="feedback-decoration">
+      <div class="feedback-orbit orbit-one"></div>
+      <div class="feedback-orbit orbit-two"></div>
+      <span class="decoration-star star-one">✳</span>
+      <span class="decoration-star star-two">✧</span>
+      <span class="decoration-star star-three">✳</span>
+    </div>
+
+
+    <div class="feedback-wrapper">
+
+      <div class="feedback-intro">
+
+        <span class="section-kicker">YOUR TURN</span>
+
+        <h2>
+          Tell us about
+          <em>your moment.</em>
+        </h2>
+
+        <p>
+          Had a beautiful coffee? Discovered a new favourite dessert?
+          Found your favourite corner? We'd love to hear about it.
+        </p>
+
+        <div class="feedback-note">
+          <span>✦</span>
+          Your words make every cup more special.
+        </div>
+
+      </div>
+
+
+      <div class="feedback-card">
+
+        <div class="form-card-heading">
+
+          <div>
+            <span class="form-kicker">SHARE A LITTLE LOVE</span>
+            <h3>Leave us a note.</h3>
+          </div>
+
+          <span class="form-coffee">☕</span>
+
+        </div>
+
+
+        <!-- SUCCESS MESSAGE -->
+
+        <div
+          class="success-message"
+          *ngIf="feedbackSubmitted"
+        >
+
+          <div class="success-icon">✓</div>
+
+          <h3>Thank you for sharing!</h3>
+
+          <p>
+            Your experience has been added to this page.
+            We appreciate your kind words.
+          </p>
+
+          <button
+            type="button"
+            (click)="feedbackSubmitted = false"
+          >
+            Write another review
+          </button>
+
+        </div>
+
+
+        <!-- FEEDBACK FORM -->
+
+        <form
+          class="feedback-form"
+          *ngIf="!feedbackSubmitted"
+          (ngSubmit)="submitFeedback()"
+          #reviewForm="ngForm"
+        >
+
+          <div class="form-row">
+
+            <div class="form-field">
+
+              <label for="feedbackName">YOUR NAME</label>
+
+              <input
+                id="feedbackName"
+                type="text"
+                name="feedbackName"
+                [(ngModel)]="feedbackName"
+                placeholder="e.g. Ananya"
+                maxlength="60"
+                required
+              >
+
+            </div>
+
+            <div class="form-field">
+
+              <label for="feedbackEmail">
+                EMAIL <span>(OPTIONAL)</span>
+              </label>
+
+              <input
+                id="feedbackEmail"
+                type="email"
+                name="feedbackEmail"
+                [(ngModel)]="feedbackEmail"
+                placeholder="you@example.com"
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- STAR RATING -->
+
+          <div class="rating-input">
+
+            <label>HOW WAS YOUR EXPERIENCE?</label>
+
+            <div class="interactive-stars">
+
+              <button
+                type="button"
+                *ngFor="let star of [1,2,3,4,5]"
+                (mouseenter)="setHoverRating(star)"
+                (mouseleave)="clearHoverRating()"
+                (click)="setRating(star)"
+                [class.active]="isStarActive(star)"
+                [attr.aria-label]="star + ' star rating'"
+                [attr.aria-pressed]="selectedRating === star"
+              >
+                ★
+              </button>
+
+            </div>
+
+            <span class="rating-hint" *ngIf="selectedRating">
+              {{ selectedRating }} out of 5 — Thank you!
+            </span>
+
+          </div>
+
+
+          <!-- COMMENT -->
+
+          <div class="form-field">
+
+            <label for="feedbackComment">YOUR EXPERIENCE</label>
+
+            <textarea
+              id="feedbackComment"
+              name="feedbackComment"
+              [(ngModel)]="feedbackComment"
+              rows="5"
+              maxlength="500"
+              placeholder="Tell us what made your visit special..."
+              required
+            ></textarea>
+
+            <span class="character-count">
+              {{ feedbackComment.length || 0 }} / 500
+            </span>
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="submit-button"
+            [disabled]="
+              isSubmitting ||
+              !feedbackName.trim() ||
+              !feedbackComment.trim() ||
+              !selectedRating
+            "
+          >
+
+            <span *ngIf="!isSubmitting">
+              Share My Experience
+            </span>
+
+            <span *ngIf="isSubmitting">
+              Sharing your story...
+            </span>
+
+            <span class="submit-arrow" *ngIf="!isSubmitting">
+              →
+            </span>
+
+            <span class="submit-spinner" *ngIf="isSubmitting"></span>
+
+          </button>
+
+          <p class="form-footnote">
+            Made with care. Shared with gratitude.
+          </p>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================
+       FINAL CTA
+  ========================================== -->
+
+  <section class="reviews-final">
+
+    <div class="final-coffee">☕</div>
+
+    <span class="section-kicker">UNTIL YOUR NEXT VISIT</span>
+
+    <h2>
+      Let's make more
+      <em>memories.</em>
+    </h2>
+
+    <p>
+      Come for the coffee. Stay for the feeling.
+    </p>
+
+    <a routerLink="/menu" class="final-button">
+      Explore Our Menu
+      <span>→</span>
+    </a>
+
+  </section>
+
+
+  <!-- =========================================
+       LOADING
+  ========================================== -->
+
+  <div class="loading-screen" *ngIf="isLoading">
+
+    <div class="loading-cup">☕</div>
+
+    <span>Brewing the reviews...</span>
+
+  </div>
+
+</section>

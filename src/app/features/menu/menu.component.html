@@ -1,0 +1,476 @@
+<main class="menu-page">
+
+  <!-- =====================================================
+       MENU HERO
+  ====================================================== -->
+
+  <section class="menu-hero">
+
+    <div class="menu-hero-image">
+
+      <img
+        src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=2200&q=90"
+        alt="Freshly prepared café food"
+      >
+
+    </div>
+
+    <div class="menu-hero-overlay"></div>
+
+    <div class="menu-hero-content">
+
+      <span class="hero-kicker">
+        BREW & BLOOM · THE MENU
+      </span>
+
+      <h1>
+        Come hungry.
+        <br>
+        <em>Leave happy.</em>
+      </h1>
+
+      <p>
+        From slow mornings and first coffees
+        to late-night cravings —
+        there is always something worth staying for.
+      </p>
+
+      <div class="hero-line">
+
+        <span></span>
+
+        <small>
+          freshly made · served warm · shared happily
+        </small>
+
+        <span></span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       MENU INTRO
+  ====================================================== -->
+
+  <section class="menu-intro">
+
+    <div class="menu-intro-inner">
+
+      <div class="intro-number">
+        MENU
+        <strong>01</strong>
+      </div>
+
+      <div>
+
+        <span class="section-kicker">
+          SOMETHING FOR EVERY MOOD
+        </span>
+
+        <h2>
+          Your table.
+          <br>
+          Your craving.
+          <br>
+          <em>Your choice.</em>
+        </h2>
+
+      </div>
+
+      <p>
+        Maybe you came for coffee.
+
+        Maybe you came because someone said
+        “let's grab something to eat.”
+
+        Either way, take your time.
+
+        We've got you covered.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       CATEGORY NAVIGATION
+  ====================================================== -->
+
+  <section class="menu-navigation">
+
+    <div class="category-scroll">
+
+      <button
+        type="button"
+        class="category-pill"
+        [class.active]="activeCategory === 'all'"
+        (click)="selectCategory('all')"
+      >
+
+        <span class="category-icon">
+          ✦
+        </span>
+
+        <span>
+          Everything Good
+        </span>
+
+      </button>
+
+
+      <button
+        *ngFor="
+          let category of categories;
+          trackBy: trackByCategory
+        "
+        type="button"
+        class="category-pill"
+        [class.active]="
+          activeCategory === category.id
+        "
+        (click)="selectCategory(category.id)"
+      >
+
+        <span class="category-icon">
+
+          <ng-container [ngSwitch]="category.id">
+
+            <span *ngSwitchCase="'pizza'">◒</span>
+            <span *ngSwitchCase="'burger'">◉</span>
+            <span *ngSwitchCase="'pasta'">〰</span>
+            <span *ngSwitchCase="'spaghetti'">≋</span>
+            <span *ngSwitchCase="'nachos'">△</span>
+            <span *ngSwitchCase="'cheese-balls'">●</span>
+            <span *ngSwitchCase="'fries'">⌁</span>
+            <span *ngSwitchCase="'bakery'">♨</span>
+            <span *ngSwitchCase="'coffee-milk'">☕</span>
+            <span *ngSwitchCase="'coffee-black'">◐</span>
+            <span *ngSwitchCase="'cold-shakes'">❄</span>
+            <span *ngSwitchDefault>✦</span>
+
+          </ng-container>
+
+        </span>
+
+        <span>
+          {{ category.name }}
+        </span>
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       SEARCH
+  ====================================================== -->
+
+  <section class="menu-tools">
+
+    <div class="menu-tools-inner">
+
+      <div class="menu-heading">
+
+        <span class="section-kicker">
+          {{ activeCategory === 'all'
+            ? 'THE FULL TABLE'
+            : 'CURRENTLY SERVING'
+          }}
+        </span>
+
+        <h2>
+          {{ getActiveCategoryName() }}
+        </h2>
+
+      </div>
+
+
+      <div class="search-box">
+
+        <span class="search-icon">
+          ⌕
+        </span>
+
+        <input
+          type="text"
+          placeholder="Search your craving..."
+          [value]="searchTerm"
+          (input)="onSearch($event)"
+        >
+
+        <button
+          *ngIf="searchTerm"
+          type="button"
+          class="clear-search"
+          (click)="clearSearch()"
+        >
+          ×
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       MENU GRID
+  ====================================================== -->
+
+  <section class="menu-items-section">
+
+    <div
+      class="menu-grid"
+      *ngIf="!loading && filteredItems.length"
+    >
+
+      <article
+        class="menu-item-card"
+        *ngFor="
+          let item of filteredItems;
+          trackBy: trackByItem
+        "
+      >
+
+        <div class="item-top">
+
+          <div class="item-badges">
+
+            <span
+              *ngIf="item.isPopular"
+              class="badge popular"
+            >
+              ★ Favourite
+            </span>
+
+            <span
+              *ngIf="item.isVeg"
+              class="badge veg"
+            >
+              VEG
+            </span>
+
+          </div>
+
+          <span class="item-number">
+            {{ item.id | slice:-2 }}
+          </span>
+
+        </div>
+
+
+        <div class="item-image">
+
+          <img
+            [src]="
+              item.image ||
+              'assets/common/images/image-placeholder.jpg'
+            "
+            [alt]="item.name"
+          >
+
+          <div class="image-shine"></div>
+
+        </div>
+
+
+        <div class="item-content">
+
+          <div class="item-title-row">
+
+            <h3>
+              {{ item.name }}
+            </h3>
+
+            <span class="price">
+              ₹{{ item.price }}
+            </span>
+
+          </div>
+
+          <p>
+            {{ item.description }}
+          </p>
+
+
+          <div class="item-bottom">
+
+            <div class="item-tags">
+
+              <span
+                *ngFor="let tag of item.tags"
+              >
+                {{ tag }}
+              </span>
+
+            </div>
+
+            <span class="availability">
+              <i></i>
+              Available
+            </span>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </div>
+
+
+    <!-- EMPTY -->
+
+    <div
+      class="empty-menu"
+      *ngIf="!loading && !filteredItems.length"
+    >
+
+      <div class="empty-icon">
+        ☕
+      </div>
+
+      <h3>
+        Hmm... nothing here yet.
+      </h3>
+
+      <p>
+        Try another craving or explore
+        everything on the menu.
+      </p>
+
+      <button
+        type="button"
+        (click)="clearSearch(); selectCategory('all')"
+      >
+        Show Everything
+      </button>
+
+    </div>
+
+
+    <!-- LOADING -->
+
+    <div
+      class="menu-loading"
+      *ngIf="loading"
+    >
+
+      <div class="loading-circle"></div>
+
+      <span>
+        Preparing the menu...
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       COFFEE FEATURE
+  ====================================================== -->
+
+  <section class="coffee-feature">
+
+    <div class="coffee-feature-image">
+
+      <img
+        src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1800&q=90"
+        alt="Freshly brewed coffee"
+      >
+
+    </div>
+
+    <div class="coffee-feature-overlay"></div>
+
+    <div class="coffee-feature-content">
+
+      <span class="section-kicker">
+        AND THEN THERE IS COFFEE
+      </span>
+
+      <h2>
+        Start with a cup.
+        <br>
+        <em>Stay for another.</em>
+      </h2>
+
+      <p>
+        With milk.
+        Without milk.
+        Hot.
+        Cold.
+
+        However you like your coffee,
+        make it yours.
+      </p>
+
+      <div class="coffee-actions">
+
+        <button
+          type="button"
+          (click)="selectCategory('coffee-milk')"
+        >
+          Velvet Coffee
+          <span>With Milk →</span>
+        </button>
+
+        <button
+          type="button"
+          (click)="selectCategory('coffee-black')"
+        >
+          Bare Brew
+          <span>Without Milk →</span>
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       MENU FOOTER CTA
+  ====================================================== -->
+
+  <section class="menu-ending">
+
+    <div class="ending-decoration">
+      ☕
+    </div>
+
+    <span class="section-kicker">
+      STILL DECIDING?
+    </span>
+
+    <h2>
+      Order what
+      <em>feels right.</em>
+    </h2>
+
+    <p>
+      There are no wrong choices here.
+      Except maybe leaving without dessert.
+    </p>
+
+    <a
+      routerLink="/contact"
+      class="menu-cta"
+    >
+      Find Your Table
+      <span>→</span>
+    </a>
+
+  </section>
+
+</main>

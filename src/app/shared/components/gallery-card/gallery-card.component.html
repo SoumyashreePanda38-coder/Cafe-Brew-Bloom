@@ -1,0 +1,8 @@
+<article class="gallery-card">
+  <img [src]="item.image" [alt]="item.altText || item.title || 'Cafe gallery image'" loading="lazy">
+  <div class="overlay">
+    <span *ngIf="item.category">{{ item.category }}</span>
+    <h3 *ngIf="item.title">{{ item.title }}</h3>
+    <p *ngIf="item.description">{{ item.description }}</p>
+  </div>
+</article>

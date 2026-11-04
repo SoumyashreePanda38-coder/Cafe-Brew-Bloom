@@ -1,0 +1,10 @@
+<article class="offer-card">
+  <div class="offer-image" *ngIf="offer.image"><img [src]="offer.image" [alt]="offer.title" loading="lazy"></div>
+  <div class="offer-content">
+    <span class="badge">{{ discountLabel }}</span>
+    <h3>{{ offer.title }}</h3>
+    <p *ngIf="offer.description">{{ offer.description }}</p>
+    <p *ngIf="offer.promoCode">Use code: <strong>{{ offer.promoCode }}</strong></p>
+    <div class="terms" *ngIf="offer.termsAndConditions?.length"><small *ngFor="let term of offer.termsAndConditions">• {{ term }}</small></div>
+  </div>
+</article>

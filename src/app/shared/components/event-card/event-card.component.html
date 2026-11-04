@@ -1,0 +1,16 @@
+<article class="event-card">
+  <div class="event-image" *ngIf="event.image"><img [src]="event.image" [alt]="event.title" loading="lazy"></div>
+  <div class="event-content">
+    <div class="event-date"><strong>{{ event.date | date:'dd' }}</strong><span>{{ event.date | date:'MMM' }}</span></div>
+    <div class="details">
+      <h3>{{ event.title }}</h3>
+      <p *ngIf="event.description">{{ event.description }}</p>
+      <div class="meta">
+        <span *ngIf="event.startTime">🕒 {{ event.startTime }}<span *ngIf="event.endTime"> - {{ event.endTime }}</span></span>
+        <span *ngIf="event.location">📍 {{ event.location }}</span>
+      </div>
+      <a *ngIf="event.bookingUrl" class="button" [href]="event.bookingUrl" target="_blank" rel="noopener">Book / Learn More</a>
+      <a *ngIf="!event.bookingUrl && event.contactNumber" class="button" [href]="'tel:' + event.contactNumber">Contact</a>
+    </div>
+  </div>
+</article>

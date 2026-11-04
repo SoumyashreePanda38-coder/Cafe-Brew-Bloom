@@ -1,0 +1,15 @@
+<article class="menu-card">
+  <div class="menu-image-wrapper" *ngIf="item.image">
+    <img class="menu-image" [src]="item.image" [alt]="item.name" loading="lazy">
+    <span class="badge left" *ngIf="item.isPopular">Popular</span>
+    <span class="badge right" *ngIf="item.isVeg">Veg</span>
+  </div>
+  <div class="menu-content">
+    <div class="menu-heading"><h3>{{ item.name }}</h3><span class="price">₹{{ item.price | number:'1.0-2' }}</span></div>
+    <p>{{ item.description }}</p>
+    <div class="menu-footer">
+      <div class="tags" *ngIf="item.tags?.length"><span *ngFor="let tag of item.tags">{{ tag }}</span></div>
+      <span class="unavailable" *ngIf="item.isAvailable === false">Currently unavailable</span>
+    </div>
+  </div>
+</article>
