@@ -1,4 +1,166 @@
-/* You can add global styles to this file, and also import other style files */
+/* ============================================================
+   GLOBAL RESPONSIVE FOUNDATION
+============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
   scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 320px;
+  margin: 0;
+  padding: 0;
+
+  overflow-x: hidden;
+
+  font-family: 'DM Sans', sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+app-root {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+img,
+video,
+iframe,
+svg {
+  max-width: 100%;
+}
+
+img {
+  display: block;
+  height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  max-width: 100%;
+  font: inherit;
+}
+
+a {
+  max-width: 100%;
+}
+
+section,
+header,
+footer,
+main,
+article,
+div {
+  min-width: 0;
+}
+
+/* Prevent long text from creating horizontal overflow */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a {
+  overflow-wrap: break-word;
+}
+
+/* ============================================================
+   MAIN APPLICATION LAYOUT
+============================================================ */
+
+.app-layout {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  overflow-x: clip;
+}
+
+.main-content {
+  flex: 1;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  overflow-x: clip;
+}
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 768px) {
+
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 100%;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+/* ============================================================
+   SMALL MOBILE
+============================================================ */
+
+@media (max-width: 480px) {
+
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

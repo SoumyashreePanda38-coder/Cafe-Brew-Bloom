@@ -8,6 +8,15 @@
   background: #faf7f2;
 
   color: #241811;
+
+  /* Prevent accidental horizontal overflow */
+  width: 100%;
+}
+
+.menu-page *,
+.menu-page *::before,
+.menu-page *::after {
+  box-sizing: border-box;
 }
 
 
@@ -130,7 +139,6 @@
   display: flex;
 
   align-items: center;
-
   justify-content: center;
 
   gap: 15px;
@@ -141,6 +149,8 @@
 .hero-line span {
   width: 45px;
   height: 1px;
+
+  flex: 0 0 auto;
 
   background: rgba(255, 255, 255, 0.4);
 }
@@ -167,6 +177,7 @@
 }
 
 .menu-intro-inner {
+  width: 100%;
   max-width: 1250px;
 
   margin: auto;
@@ -266,6 +277,8 @@
 
   z-index: 100;
 
+  width: 100%;
+
   padding: 15px 0;
 
   background: rgba(250, 247, 242, 0.88);
@@ -275,6 +288,8 @@
   border-bottom: 1px solid rgba(75, 43, 25, 0.08);
 
   backdrop-filter: blur(18px);
+
+  -webkit-backdrop-filter: blur(18px);
 }
 
 .category-scroll {
@@ -288,7 +303,11 @@
 
   overflow-x: auto;
 
+  overflow-y: hidden;
+
   scrollbar-width: none;
+
+  -webkit-overflow-scrolling: touch;
 }
 
 .category-scroll::-webkit-scrollbar {
@@ -315,6 +334,8 @@
   color: #70594c;
 
   cursor: pointer;
+
+  font-family: inherit;
 
   font-size: 0.72rem;
 
@@ -357,6 +378,8 @@
   width: 22px;
   height: 22px;
 
+  flex: 0 0 22px;
+
   border-radius: 50%;
 
   background: rgba(190, 126, 81, 0.1);
@@ -382,6 +405,7 @@
 }
 
 .menu-tools-inner {
+  width: 100%;
   max-width: 1250px;
 
   margin: auto;
@@ -393,6 +417,10 @@
   justify-content: space-between;
 
   gap: 30px;
+}
+
+.menu-heading {
+  min-width: 0;
 }
 
 .menu-heading h2 {
@@ -407,12 +435,18 @@
   line-height: 1;
 
   letter-spacing: -0.04em;
+
+  overflow-wrap: break-word;
 }
 
 .search-box {
   width: 320px;
 
+  max-width: 100%;
+
   height: 52px;
+
+  flex: 0 1 320px;
 
   display: flex;
 
@@ -444,6 +478,8 @@
 }
 
 .search-icon {
+  flex: 0 0 auto;
+
   font-size: 1.4rem;
 
   color: #9b7965;
@@ -451,12 +487,15 @@
 
 .search-box input {
   width: 100%;
+  min-width: 0;
 
   border: none;
 
   outline: none;
 
   background: transparent;
+
+  font-family: inherit;
 
   font-size: 0.8rem;
 
@@ -468,9 +507,13 @@
 }
 
 .clear-search {
+  flex: 0 0 auto;
+
   border: none;
 
   background: transparent;
+
+  font-family: inherit;
 
   font-size: 1.2rem;
 
@@ -485,23 +528,28 @@
 ========================================================= */
 
 .menu-items-section {
+  width: 100%;
+
   padding: 35px 7% 140px;
 }
 
 .menu-grid {
+  width: 100%;
   max-width: 1250px;
 
   margin: auto;
 
   display: grid;
 
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 
   gap: 22px;
 }
 
 .menu-item-card {
   position: relative;
+
+  min-width: 0;
 
   overflow: hidden;
 
@@ -540,12 +588,18 @@
   justify-content: space-between;
 
   align-items: center;
+
+  gap: 10px;
 }
 
 .item-badges {
   display: flex;
 
+  flex-wrap: wrap;
+
   gap: 6px;
+
+  min-width: 0;
 }
 
 .badge {
@@ -576,6 +630,8 @@
   width: 32px;
   height: 32px;
 
+  flex: 0 0 32px;
+
   display: flex;
 
   align-items: center;
@@ -590,6 +646,8 @@
   color: #705a4d;
 
   backdrop-filter: blur(8px);
+
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .item-image {
@@ -621,6 +679,8 @@
 
   inset: 0;
 
+  pointer-events: none;
+
   background:
     linear-gradient(
       115deg,
@@ -639,6 +699,8 @@
 }
 
 .item-content {
+  min-width: 0;
+
   padding: 25px;
 }
 
@@ -653,6 +715,8 @@
 }
 
 .item-title-row h3 {
+  min-width: 0;
+
   margin: 0;
 
   font-family: 'Playfair Display', Georgia, serif;
@@ -662,6 +726,8 @@
   font-weight: 500;
 
   line-height: 1.1;
+
+  overflow-wrap: break-word;
 }
 
 .price {
@@ -706,6 +772,8 @@
   flex-wrap: wrap;
 
   gap: 5px;
+
+  min-width: 0;
 }
 
 .item-tags span {
@@ -729,6 +797,8 @@
 
   gap: 5px;
 
+  flex: 0 0 auto;
+
   font-size: 0.55rem;
 
   color: #71805e;
@@ -739,6 +809,8 @@
 .availability i {
   width: 5px;
   height: 5px;
+
+  flex: 0 0 5px;
 
   border-radius: 50%;
 
@@ -763,6 +835,8 @@
 
   align-items: center;
   justify-content: center;
+
+  padding: 30px 20px;
 
   text-align: center;
 }
@@ -796,6 +870,8 @@
 }
 
 .empty-menu p {
+  max-width: 500px;
+
   margin: 0 0 25px;
 
   color: #806f63;
@@ -811,6 +887,8 @@
   background: #2b1a12;
 
   color: #ffffff;
+
+  font-family: inherit;
 
   cursor: pointer;
 }
@@ -859,6 +937,7 @@
   min-height: 650px;
 
   display: flex;
+
   align-items: center;
 
   overflow: hidden;
@@ -868,6 +947,7 @@
 
 .coffee-feature-image {
   position: absolute;
+
   inset: 0;
 }
 
@@ -880,6 +960,7 @@
 
 .coffee-feature-overlay {
   position: absolute;
+
   inset: 0;
 
   background:
@@ -934,6 +1015,8 @@
 .coffee-actions {
   display: flex;
 
+  flex-wrap: wrap;
+
   gap: 10px;
 }
 
@@ -958,7 +1041,11 @@
 
   color: #ffffff;
 
+  font-family: inherit;
+
   backdrop-filter: blur(10px);
+
+  -webkit-backdrop-filter: blur(10px);
 
   cursor: pointer;
 
@@ -1093,6 +1180,23 @@
 
 
 /* =========================================================
+   TABLET / SMALL LAPTOP
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .menu-intro-inner {
+    gap: 45px;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
    TABLET
 ========================================================= */
 
@@ -1106,11 +1210,22 @@
 
   .menu-intro-inner > p {
     grid-column: 2;
+
     padding-top: 0;
   }
 
-  .menu-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .menu-items-section {
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+
+  .menu-tools {
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+
+  .coffee-feature-content {
+    width: min(1100px, calc(100% - 60px));
   }
 
 }
@@ -1121,6 +1236,10 @@
 ========================================================= */
 
 @media (max-width: 700px) {
+
+  /* -------------------------------------------------------
+     HERO
+  ------------------------------------------------------- */
 
   .menu-hero {
     min-height: 650px;
@@ -1136,11 +1255,34 @@
     font-size: clamp(3.5rem, 15vw, 5rem);
   }
 
+  .menu-hero-content > p {
+    font-size: 0.9rem;
+
+    line-height: 1.8;
+  }
+
+  .hero-line {
+    gap: 10px;
+
+    margin-top: 35px;
+  }
+
+  .hero-line span {
+    width: 30px;
+  }
+
   .hero-line small {
     font-size: 0.52rem;
 
+    line-height: 1.5;
+
     text-align: center;
   }
+
+
+  /* -------------------------------------------------------
+     INTRO
+  ------------------------------------------------------- */
 
   .menu-intro {
     padding: 90px 22px;
@@ -1162,6 +1304,34 @@
     margin-top: 30px;
   }
 
+
+  /* -------------------------------------------------------
+     CATEGORY NAVIGATION
+  ------------------------------------------------------- */
+
+  .menu-navigation {
+    padding: 12px 0;
+  }
+
+  .category-scroll {
+    width: calc(100% - 20px);
+
+    gap: 7px;
+
+    padding-bottom: 2px;
+  }
+
+  .category-pill {
+    padding: 10px 14px;
+
+    font-size: 0.68rem;
+  }
+
+
+  /* -------------------------------------------------------
+     MENU TOOLS
+  ------------------------------------------------------- */
+
   .menu-tools {
     padding: 60px 20px 25px;
   }
@@ -1170,11 +1340,24 @@
     display: block;
   }
 
+  .menu-heading h2 {
+    font-size: clamp(2.7rem, 12vw, 3.8rem);
+  }
+
   .search-box {
     width: 100%;
 
+    max-width: none;
+
     margin-top: 25px;
+
+    flex: none;
   }
+
+
+  /* -------------------------------------------------------
+     MENU GRID
+  ------------------------------------------------------- */
 
   .menu-items-section {
     padding: 25px 20px 90px;
@@ -1182,11 +1365,18 @@
 
   .menu-grid {
     grid-template-columns: 1fr;
+
+    gap: 20px;
   }
 
   .item-image {
     height: 250px;
   }
+
+
+  /* -------------------------------------------------------
+     COFFEE FEATURE
+  ------------------------------------------------------- */
 
   .coffee-feature {
     min-height: 650px;
@@ -1202,14 +1392,467 @@
 
   .coffee-actions {
     flex-direction: column;
+
+    width: 100%;
   }
 
   .coffee-actions button {
     width: 100%;
+
+    min-width: 0;
   }
+
+
+  /* -------------------------------------------------------
+     ENDING
+  ------------------------------------------------------- */
 
   .menu-ending {
     padding: 100px 20px;
+  }
+
+  .menu-ending h2 {
+    font-size: clamp(3rem, 13vw, 4.5rem);
+  }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   320px - 380px
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .menu-hero {
+    min-height: 600px;
+  }
+
+  .menu-hero-content {
+    width: calc(100% - 24px);
+
+    padding-top: 90px;
+  }
+
+  .hero-kicker {
+    margin-bottom: 20px;
+
+    font-size: 0.55rem;
+
+    letter-spacing: 0.25em;
+  }
+
+  .menu-hero h1 {
+    font-size: 3rem;
+
+    letter-spacing: -0.045em;
+  }
+
+  .menu-hero-content > p {
+    font-size: 0.82rem;
+
+    line-height: 1.7;
+  }
+
+  .hero-line {
+    gap: 8px;
+
+    margin-top: 30px;
+  }
+
+  .hero-line span {
+    width: 25px;
+  }
+
+  .hero-line small {
+    font-size: 0.45rem;
+
+    letter-spacing: 0.1em;
+  }
+
+
+  /* -------------------------------------------------------
+     INTRO
+  ------------------------------------------------------- */
+
+  .menu-intro {
+    padding: 75px 18px;
+  }
+
+  .menu-intro h2 {
+    font-size: 2.8rem;
+  }
+
+  .menu-intro-inner > p {
+    font-size: 0.86rem;
+
+    line-height: 1.8;
+  }
+
+
+  /* -------------------------------------------------------
+     CATEGORY
+  ------------------------------------------------------- */
+
+  .category-scroll {
+    width: calc(100% - 14px);
+  }
+
+  .category-pill {
+    padding: 9px 12px;
+
+    gap: 6px;
+
+    font-size: 0.63rem;
+  }
+
+  .category-icon {
+    width: 20px;
+    height: 20px;
+
+    flex-basis: 20px;
+  }
+
+
+  /* -------------------------------------------------------
+     TOOLS
+  ------------------------------------------------------- */
+
+  .menu-tools {
+    padding: 50px 16px 20px;
+  }
+
+  .menu-heading h2 {
+    font-size: 2.5rem;
+  }
+
+  .search-box {
+    height: 50px;
+
+    padding: 0 12px;
+  }
+
+
+  /* -------------------------------------------------------
+     MENU CARDS
+  ------------------------------------------------------- */
+
+  .menu-items-section {
+    padding: 20px 16px 75px;
+  }
+
+  .menu-item-card {
+    border-radius: 15px;
+  }
+
+  .item-top {
+    top: 12px;
+
+    left: 12px;
+    right: 12px;
+  }
+
+  .item-image {
+    height: 220px;
+  }
+
+  .item-content {
+    padding: 20px;
+  }
+
+  .item-title-row {
+    gap: 8px;
+  }
+
+  .item-title-row h3 {
+    font-size: 1.25rem;
+  }
+
+  .price {
+    font-size: 1rem;
+  }
+
+  .item-content > p {
+    min-height: auto;
+
+    font-size: 0.75rem;
+  }
+
+  .item-bottom {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .availability {
+    align-self: flex-start;
+  }
+
+
+  /* -------------------------------------------------------
+     COFFEE
+  ------------------------------------------------------- */
+
+  .coffee-feature {
+    min-height: 600px;
+  }
+
+  .coffee-feature-content {
+    width: calc(100% - 30px);
+  }
+
+  .coffee-feature-content h2 {
+    font-size: 2.9rem;
+  }
+
+  .coffee-feature-content > p {
+    font-size: 0.82rem;
+
+    line-height: 1.8;
+  }
+
+
+  /* -------------------------------------------------------
+     ENDING
+  ------------------------------------------------------- */
+
+  .menu-ending {
+    padding: 80px 16px;
+  }
+
+  .menu-ending h2 {
+    font-size: 2.9rem;
+  }
+
+  .menu-ending > p {
+    font-size: 0.82rem;
+  }
+
+  .menu-cta {
+    width: 100%;
+
+    justify-content: center;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ~280px - 319px
+========================================================= */
+
+@media (max-width: 319px) {
+
+  .menu-hero-content {
+    width: calc(100% - 18px);
+  }
+
+  .menu-hero h1 {
+    font-size: 2.65rem;
+  }
+
+  .hero-kicker {
+    font-size: 0.48rem;
+
+    letter-spacing: 0.2em;
+  }
+
+  .menu-hero-content > p {
+    font-size: 0.76rem;
+  }
+
+  .hero-line small {
+    font-size: 0.4rem;
+  }
+
+  .menu-intro {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .menu-intro h2 {
+    font-size: 2.5rem;
+  }
+
+  .menu-tools {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .menu-heading h2 {
+    font-size: 2.3rem;
+  }
+
+  .menu-items-section {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .item-content {
+    padding: 17px;
+  }
+
+  .item-title-row h3 {
+    font-size: 1.15rem;
+  }
+
+  .price {
+    font-size: 0.95rem;
+  }
+
+  .coffee-feature-content {
+    width: calc(100% - 22px);
+  }
+
+  .coffee-feature-content h2 {
+    font-size: 2.6rem;
+  }
+
+  .menu-ending {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .menu-ending h2 {
+    font-size: 2.6rem;
+  }
+
+}
+
+
+/* =========================================================
+   LANDSCAPE PHONES
+========================================================= */
+
+@media (max-height: 600px) and (orientation: landscape) {
+
+  .menu-hero {
+    min-height: 520px;
+  }
+
+  .menu-hero-content {
+    padding-top: 70px;
+  }
+
+  .menu-hero h1 {
+    font-size: clamp(3rem, 9vw, 5rem);
+
+    margin-bottom: 18px;
+  }
+
+  .menu-hero-content > p {
+    max-width: 550px;
+
+    font-size: 0.85rem;
+
+    line-height: 1.6;
+  }
+
+  .hero-line {
+    margin-top: 25px;
+  }
+
+  .coffee-feature {
+    min-height: 520px;
+  }
+
+  .coffee-feature-content h2 {
+    font-size: clamp(3rem, 8vw, 5rem);
+  }
+
+  .menu-ending {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+}
+
+
+/* =========================================================
+   TOUCH DEVICES
+   Remove hover lift where hover is not meaningful
+========================================================= */
+
+@media (hover: none) {
+
+  .menu-item-card:hover {
+    transform: none;
+
+    box-shadow:
+      0 12px 45px rgba(58, 37, 25, 0.055);
+  }
+
+  .menu-item-card:hover .item-image img {
+    transform: none;
+  }
+
+  .menu-item-card:hover .image-shine {
+    transform: translateX(-120%);
+  }
+
+  .category-pill:hover {
+    transform: none;
+  }
+
+  .coffee-actions button:hover {
+    transform: none;
+
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .menu-cta:hover {
+    transform: none;
+
+    box-shadow: none;
+  }
+
+  .menu-cta:hover span {
+    transform: none;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   Accessibility / low-motion preference
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .menu-hero-image img {
+    animation: none;
+
+    transform: scale(1);
+  }
+
+  .menu-item-card,
+  .menu-item-card:hover,
+  .category-pill,
+  .coffee-actions button,
+  .menu-cta,
+  .menu-cta span,
+  .item-image img,
+  .image-shine {
+    transition: none;
+  }
+
+  .menu-item-card:hover {
+    transform: none;
+  }
+
+  .menu-item-card:hover .item-image img {
+    transform: none;
+  }
+
+  .menu-item-card:hover .image-shine {
+    transform: none;
+  }
+
+  .loading-circle {
+    animation: none;
   }
 
 }

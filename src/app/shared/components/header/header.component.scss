@@ -9,6 +9,7 @@
   left: 0;
 
   width: 100%;
+  max-width: 100%;
 
   z-index: 1000;
 
@@ -21,18 +22,12 @@
     box-shadow 0.35s ease;
 }
 
-
-/* ============================================================
-   SCROLLED STATE
-============================================================ */
-
 .site-header.scrolled {
   position: fixed;
 
   padding: 10px 0;
 
-  background:
-    rgba(20, 15, 12, 0.82);
+  background: rgba(20, 15, 12, 0.82);
 
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
@@ -48,31 +43,29 @@
 
 .header-container {
   width: min(1380px, calc(100% - 50px));
-
+  max-width: 1380px;
   min-height: 64px;
 
   margin: 0 auto;
-
   padding: 0 18px;
 
   display: flex;
-
   align-items: center;
 
   gap: 35px;
 
   border: 1px solid rgba(255, 255, 255, 0.13);
-
   border-radius: 18px;
 
-  background:
-    rgba(255, 255, 255, 0.075);
+  background: rgba(255, 255, 255, 0.075);
 
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
 
   box-shadow:
     0 15px 50px rgba(0, 0, 0, 0.12);
+
+  min-width: 0;
 }
 
 
@@ -82,15 +75,14 @@
 
 .brand {
   display: flex;
-
   align-items: center;
 
-  gap: 12px;
+  gap: 10px;
 
-  min-width: max-content;
+  min-width: 0;
+  flex: 1;
 
   color: #ffffff;
-
   text-decoration: none;
 }
 
@@ -98,81 +90,94 @@
   width: 44px;
   height: 44px;
 
+  flex: 0 0 44px;
+
   overflow: hidden;
 
   border-radius: 50%;
 
   border: 1px solid rgba(255, 255, 255, 0.3);
 
-  background:
-    rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .brand-logo img {
   width: 100%;
   height: 100%;
 
+  display: block;
+
   object-fit: cover;
 }
 
 .brand-text {
   display: flex;
-
   flex-direction: column;
 
   gap: 2px;
+
+  min-width: 0;
+  overflow: hidden;
 }
 
 .brand-name {
-  font-size: 1rem;
+  overflow: hidden;
 
+  font-size: 1rem;
   font-weight: 700;
 
   letter-spacing: -0.01em;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .brand-tagline {
+  overflow: hidden;
+
   font-size: 0.6rem;
 
   letter-spacing: 0.12em;
-
   text-transform: uppercase;
 
   color: rgba(255, 255, 255, 0.58);
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 
 /* ============================================================
-   NAVIGATION
+   DESKTOP NAVIGATION
 ============================================================ */
 
 .desktop-nav {
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
   gap: 24px;
 
   flex: 1;
+
+  min-width: 0;
 }
 
 .desktop-nav a {
   position: relative;
+
+  flex: 0 0 auto;
 
   padding: 10px 0;
 
   color: rgba(255, 255, 255, 0.72);
 
   font-size: 0.78rem;
-
   font-weight: 500;
 
   text-decoration: none;
 
-  transition:
-    color 0.25s ease;
+  transition: color 0.25s ease;
 }
 
 .desktop-nav a::after {
@@ -188,13 +193,11 @@
 
   border-radius: 10px;
 
-  background:
-    #e8b27a;
+  background: #e8b27a;
 
   transform: translateX(-50%);
 
-  transition:
-    width 0.3s ease;
+  transition: width 0.3s ease;
 }
 
 .desktop-nav a:hover,
@@ -216,8 +219,11 @@
   display: inline-flex;
 
   align-items: center;
+  justify-content: center;
 
   gap: 8px;
+
+  flex: 0 0 auto;
 
   min-height: 44px;
 
@@ -235,10 +241,11 @@
   color: #ffffff;
 
   font-size: 0.78rem;
-
   font-weight: 700;
 
   text-decoration: none;
+
+  white-space: nowrap;
 
   box-shadow:
     0 8px 25px rgba(185, 111, 62, 0.3);
@@ -270,7 +277,11 @@
   width: 44px;
   height: 44px;
 
+  flex: 0 0 44px;
+
   margin-left: auto;
+
+  padding: 0;
 
   border: 1px solid rgba(255, 255, 255, 0.2);
 
@@ -321,10 +332,14 @@
 
 
 /* ============================================================
-   RESPONSIVE
+   RESPONSIVE — TABLET
 ============================================================ */
 
 @media (max-width: 1100px) {
+
+  .header-container {
+    gap: 20px;
+  }
 
   .desktop-nav {
     gap: 16px;
@@ -334,10 +349,25 @@
     font-size: 0.72rem;
   }
 
+  .header-cta {
+    padding: 0 14px;
+  }
 }
 
 
+/* ============================================================
+   RESPONSIVE — MOBILE
+============================================================ */
+
 @media (max-width: 900px) {
+
+  .site-header {
+    padding: 12px 0;
+  }
+
+  .site-header.scrolled {
+    padding: 8px 0;
+  }
 
   .desktop-nav,
   .header-cta {
@@ -345,11 +375,45 @@
   }
 
   .mobile-menu-button {
-    display: block;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-left: auto;
   }
 
   .header-container {
     width: calc(100% - 30px);
+    max-width: none;
+
+    min-height: 58px;
+
+    padding: 0 12px;
+
+    gap: 10px;
+
+    border-radius: 16px;
+  }
+
+  .brand {
+    gap: 9px;
+  }
+
+  .brand-logo {
+    width: 40px;
+    height: 40px;
+
+    flex-basis: 40px;
+  }
+
+  .brand-name {
+    font-size: 0.9rem;
+  }
+
+  .brand-tagline {
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
   }
 
   .mobile-nav {
@@ -362,18 +426,17 @@
     left: 15px;
     right: 15px;
 
+    width: auto;
+
     padding: 12px;
 
     flex-direction: column;
-
     gap: 4px;
 
     border: 1px solid rgba(255, 255, 255, 0.12);
-
     border-radius: 16px;
 
-    background:
-      rgba(25, 19, 16, 0.94);
+    background: rgba(25, 19, 16, 0.94);
 
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
@@ -382,7 +445,6 @@
       0 20px 50px rgba(0, 0, 0, 0.3);
 
     opacity: 0;
-
     visibility: hidden;
 
     transform: translateY(-10px);
@@ -395,13 +457,15 @@
 
   .mobile-nav.open {
     opacity: 1;
-
     visibility: visible;
-
     transform: translateY(0);
   }
 
   .mobile-nav a {
+    display: block;
+
+    width: 100%;
+
     padding: 14px 16px;
 
     border-radius: 10px;
@@ -421,5 +485,81 @@
 
     color: #ffffff;
   }
+}
 
+
+/* ============================================================
+   RESPONSIVE — SMALL PHONES
+============================================================ */
+
+@media (max-width: 380px) {
+
+  .site-header {
+    padding: 10px 0;
+  }
+
+  .header-container {
+    width: calc(100% - 20px);
+
+    min-height: 54px;
+
+    padding: 0 9px;
+
+    gap: 8px;
+
+    border-radius: 14px;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .brand-logo {
+    width: 36px;
+    height: 36px;
+
+    flex-basis: 36px;
+  }
+
+  .brand-name {
+    font-size: 0.82rem;
+  }
+
+  .brand-tagline {
+    font-size: 0.44rem;
+    letter-spacing: 0.07em;
+  }
+
+  .mobile-menu-button {
+    width: 40px;
+    height: 40px;
+
+    flex-basis: 40px;
+  }
+
+  .mobile-menu-button span {
+    width: 18px;
+  }
+
+  .mobile-nav {
+    left: 10px;
+    right: 10px;
+  }
+}
+
+
+/* ============================================================
+   ACCESSIBILITY
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .site-header,
+  .site-header *,
+  .site-header *::before,
+  .site-header *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
